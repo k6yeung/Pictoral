@@ -1,0 +1,55 @@
+//
+   Created by kyleyeung on 2017-01-16.
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        title Day 001 Login Form
+        link(rel='stylesheet prefetch', href='http://fonts.googleapis.com/css?family=Open+Sans:600')
+        link(rel='stylesheet', href='/stylesheets/login.css')
+    body
+        .login-wrap
+            .login-html
+                .title
+                    h1 Pictoral
+                input#tab-1.sign-in(type='radio', name='tab', checked='')
+                label.tab(for='tab-1') Sign In
+                input#tab-2.sign-up(type='radio', name='tab')
+                label.tab(for='tab-2') Sign Up
+                .login-form
+                    .sign-in-htm
+                        .group
+                            label.label(for='user') Username
+                            input#user.input(type='text')
+                        .group
+                            label.label(for='pass') Password
+                            input#pass.input(type='password', data-type='password')
+                        .group
+                            input#check.check(type='checkbox', checked='')
+                            label(for='check')
+                                span.icon
+                                |  Keep me Signed in
+                        .group
+                            input.button(type='submit', value='Sign In')
+                        .hr
+                        .foot-lnk
+                            a(href='#forgot') Forgot Password?
+                    .sign-up-htm
+                        .group
+                            label.label(for='user') Username
+                            input#user.input(type='text')
+                        .group
+                            label.label(for='pass') Password
+                            input#pass.input(type='password', data-type='password')
+                        .group
+                            label.label(for='pass') Repeat Password
+                            input#pass.input(type='password', data-type='password')
+                        .group
+                            label.label(for='pass') Email Address
+                            input#pass.input(type='text')
+                        .group
+                            input.button(type='submit', value='Sign Up')
+                        .hr
+                        .foot-lnk
+                            label(for='tab-1')
+                                | Already Member?
