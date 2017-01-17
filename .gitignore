@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+node_modules/
+data/
+.DS_Store
+.idea/Pictoral.iml
+.idea/inspectionProfiles/
+.idea/modules.xml
+.idea/vcs.xml
+npm-debug.log
+public/images/
+.idea/
