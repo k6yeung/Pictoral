@@ -13,9 +13,14 @@ html
         script(src='/vendor/bootstrap.min.js')
         script(src='/javascripts/views/login.js')
         script(src='/javascripts/controllers/loginController.js')
+        script(src='/javascripts/controllers/signupController.js')
         script(src='/javascripts/form-validator/loginValidator.js')
+        script(src='/javascripts/form-validator/accountValidator.js')
+
+
 
     include modals/alert
+    include modals/form-errors
 
     body
         .login-wrap
@@ -29,11 +34,11 @@ html
                 .login-form
                     form.sign-in-htm(id='login', method='post')
                         .group
-                            label.label(for='user') Username
-                            input.form-control(type='text', id='user-tf', name='user')
+                            label.label Username
+                            input.form-control(type='text', id='login-user', name='user')
                         .group
-                            label.label(for='pass') Password
-                            input.form-control(type='password', id='pass-tf', name='pass')
+                            label.label Password
+                            input.form-control(type='password', id='login-pass', name='pass')
                         .group
                             input.button(type='submit', value='Sign In')
                         .hr
@@ -41,17 +46,17 @@ html
                             a(href='#forgot') Forgot Password?
                     form.sign-up-htm(id='signup', method='post')
                         .group
-                            label.label(for='user') Username
-                            input#user.form-control(type='text')
+                            label.label Username
+                            input.form-control(type='text' id='signup-user')
                         .group
-                            label.label(for='pass') Password
-                            input#pass.form-control(type='password', data-type='password')
+                            label.label Password
+                            input.form-control(type='password', data-type='password' id='signup-pass1')
                         .group
-                            label.label(for='pass') Repeat Password
-                            input#pass.form-control(type='password', data-type='password')
+                            label.label Repeat Password
+                            input.form-control(type='password', data-type='password', id='signup-pass2')
                         .group
-                            label.label(for='pass') Email Address
-                            input#pass.form-control(type='text')
+                            label.label Email Address
+                            input.form-control(type='text', id='email')
                         .group
                             input.button(type='submit', value='Sign Up')
                         .hr
