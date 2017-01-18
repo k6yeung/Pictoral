@@ -4,9 +4,16 @@ doctype html
 html
     head
         meta(charset='UTF-8')
-        title Day 001 Login Form
+        title Pictoral Login
         link(rel='stylesheet prefetch', href='http://fonts.googleapis.com/css?family=Open+Sans:600')
         link(rel='stylesheet', href='/stylesheets/login.css')
+        script(src='/vendor/jquery-2.2.3.min.js')
+        script(src='/vendor/jquery.form.min.js')
+        script(src='/vendor/bootstrap.min.js')
+        script(src='/javascripts/views/login.js')
+        script(src='/javascripts/controllers/loginController.js')
+        script(src='/javascripts/form-validator/loginValidator.js')
+            //script(src='/js/form-validators/emailValidator.js')
     body
         .login-wrap
             .login-html
@@ -17,13 +24,13 @@ html
                 input#tab-2.sign-up(type='radio', name='tab')
                 label.tab(for='tab-2') Sign Up
                 .login-form
-                    .sign-in-htm
+                    form.sign-in-htm(id='login', method='post')
                         .group
                             label.label(for='user') Username
-                            input#user.input(type='text')
+                            input.form-control(type='text', id='user-tf', name='user')
                         .group
                             label.label(for='pass') Password
-                            input#pass.input(type='password', data-type='password')
+                            input.form-control(type='password', id='pass-tf', name='pass')
                         .group
                             input#check.check(type='checkbox', checked='')
                             label(for='check')
@@ -53,3 +60,4 @@ html
                         .foot-lnk
                             label(for='tab-1')
                                 | Already Member?
+
