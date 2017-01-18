@@ -3,7 +3,7 @@ function AccountValidator()
 {
 // build array maps of the form inputs & control groups //
 
-	this.formFields = [$('#signup-user'), $('#signup-pass1'), $('signup-#pass2'), $('signup-#email')];
+	this.formFields = [$('#signup-user'), $('#signup-pass1'), $('#signup-pass2'), $('#signup-email')];
 	// this.controlGroups = [$('#name-cg'), $('#email-cg'), $('#user-cg'), $('#pass-cg')];
 	
 // bind the form-error modal window to this controller to display any errors //
@@ -22,7 +22,7 @@ function AccountValidator()
 	};
 
 	this.validateSecondPassword = function(s,e) {
-		return s.equals(e);
+		return s === e;
 	}
 	
 	this.validateEmail = function(e)
@@ -67,7 +67,7 @@ AccountValidator.prototype.validateForm = function()
 		// this.controlGroups[3].addClass('error');
 		e.push('Password Should Be At Least 6 Characters');
 	}
-	if (this.validateSecondPassword(this.formFields[2].val(), this.formFields[1].val())){
+	if (this.validateSecondPassword(this.formFields[1].val(), this.formFields[2].val()) == false){
 		e.push('Both Passwords Do Not Match');
 	}
     if (this.validateEmail(this.formFields[3].val()) == false) {
