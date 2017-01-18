@@ -2,7 +2,9 @@
 $(document).ready(function(){
 
     var lv = new LoginValidator();
-    // var lc = new LoginController();
+    var lc = new LoginController();
+    var av = new AccountValidator();
+    var sc = new SignupController();
 
 // main login form //
     $('#login').ajaxForm({
@@ -24,35 +26,40 @@ $(document).ready(function(){
     });
     $('#user-tf').focus();
 
-// login retrieval form via email //
 
-    // var ev = new EmailValidator();
-
-    $('#get-credentials-form').ajaxForm({
-        url: '/lost-password',
+    $('#account-form').ajaxForm({
         beforeSubmit : function(formData, jqForm, options){
-            if (ev.validateEmail($('#email-tf').val())){
-                ev.hideEmailAlert();
-                return true;
-            }	else{
-                ev.showEmailAlert("<b>Error!</b> Please enter a valid email address");
-                return false;
-            }
+            return av.validateForm();
         },
         success	: function(responseText, status, xhr, $form){
-            $('#cancel').html('OK');
-            $('#retrieve-password-submit').hide();
-            ev.showEmailSuccess("Check your email on how to reset your password.");
+            if (status == 'success') $('.modal-alert').modal('show');
         },
         error : function(e){
-            if (e.responseText == 'email-not-found'){
-                ev.showEmailAlert("Email not found. Are you sure you entered it correctly?");
-            }	else{
-                $('#cancel').html('OK');
-                $('#retrieve-password-submit').hide();
-                ev.showEmailAlert("Sorry. There was a problem, please try again later.");
+            if (e.responseText == 'email-taken'){
+                av.showInvalidEmail();
+            }	else if (e.responseText == 'username-taken'){
+                av.showInvalidUserName();
             }
         }
     });
+    $('#name-tf').focus();
+
+// customize the account signup form //
+
+    $('#account-form h2').text('Signup');
+    $('#account-form #sub1').text('Please tell us a little about yourself');
+    $('#account-form #sub2').text('Choose your username & password');
+    $('#account-form-btn1').html('Cancel');
+    $('#account-form-btn2').html('Submit');
+    $('#account-form-btn2').addClass('btn-primary');
+
+// setup the alert that displays when an account is successfully created //
+
+    $('.modal-alert').modal({ show:false, keyboard : false, backdrop : 'static' });
+    $('.modal-alert .modal-header h4').text('Account Created!');
+    $('.modal-alert .modal-body p').html('Your account has been created.</br>Click OK to return to the login page.');
+
+
+
 
 });
