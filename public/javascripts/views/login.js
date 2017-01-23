@@ -9,13 +9,7 @@ $(document).ready(function(){
     // Login
     $('#login').ajaxForm({
         beforeSubmit : function(formData, jqForm, options){
-            if (lv.validateForm() == false){
-                return false;
-            } 	else{
-                // append 'remember-me' option to formData to write local cookie //
-                formData.push({name:'remember-me', value:$('.button-rememember-me-glyph').hasClass('glyphicon-ok')});
-                return true;
-            }
+            return lv.validateForm();
         },
         success	: function(responseText, status, xhr, $form){
             if (status == 'success') window.location.href = '/home';
@@ -38,7 +32,7 @@ $(document).ready(function(){
         error : function(e){
             if (e.responseText == 'email-taken'){
                 av.showInvalidEmail();
-            }	else if (e.responseText == 'username-taken'){
+            }	else if (e.responseText == 'username-taken') {
                 av.showInvalidUserName();
             }
         }
@@ -49,7 +43,7 @@ $(document).ready(function(){
 
     $('.modal-alert').modal({ show:false, keyboard : false, backdrop : 'static' });
     $('.modal-alert .modal-header h4').text('Account Created!');
-    $('.modal-alert .modal-body p').html('Your account has been created.</br>Click OK to return to the login page.');
+    $('.modal-alert .modal-body p').html('Your account has been created.</br>Click close to return to the login page.');
 
 
 

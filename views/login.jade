@@ -43,24 +43,18 @@ html
                             input.button(type='submit', value='Sign In')
                         .hr
                         .foot-lnk
-                            a(href='#forgot') Forgot Password?
-                    form.sign-up-htm(id='signup', method='post')
+                            .copywrite &copy; 2017
+                    form.sign-up-htm(id='signup', method='post', action='/signup')
                         .group
                             label.label Username
-                            input.form-control(type='text' id='signup-user')
+                            input.form-control(type='text' id='signup-user', name='user')
                         .group
                             label.label Password
-                            input.form-control(type='password', data-type='password' id='signup-pass1')
+                            input.form-control(type='password', data-type='password' id='signup-pass1', name='pass')
                         .group
                             label.label Repeat Password
                             input.form-control(type='password', data-type='password', id='signup-pass2')
                         .group
-                            label.label Email Address
-                            input.form-control(type='text', id='email')
-                        .group
                             input.button(type='submit', value='Sign Up')
-                        .hr
-                        .foot-lnk
-                            label(for='tab-1')
-                                | Already Member?
+
 

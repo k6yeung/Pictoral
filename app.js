@@ -9,21 +9,12 @@ var http = require('http');
 var MongoStore = require('connect-mongo')(session);
 
 
-
-// Database
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/accounts');
-
 var login = require('./routes/login');
-var index = require('./routes/index');
+var home = require('./routes/home');
 var users = require('./routes/users');
 
 var app = express();
 
-
-
-//TODO: build mongo database connection url //
 
 var dbHost = process.env.DB_HOST || 'localhost';
 var dbPort = process.env.DB_PORT || 27017;
@@ -57,13 +48,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Make our db accessible to our router
-app.use(function(req,res,next){
-    req.db = db;
-    next();
-});
 
 app.use('/', login);
+app.use('/home', home);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -72,6 +59,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {
