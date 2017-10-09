@@ -5,16 +5,14 @@ var router = express.Router();
 
 // logged-in user homepage //
 
-router.get('/home', function(req, res) {
+/* GET login page. */
+router.get('/', function(req, res, next) {
     if (req.session.user == null){
         // if user is not logged-in redirect back to login page //
         res.redirect('/');
     }	else{
-        res.render('home', {
-            title : 'Express'
-        });
+        res.render('home', {});
     }
 });
-
 
 module.exports = router;
