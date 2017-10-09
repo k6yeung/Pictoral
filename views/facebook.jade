@@ -1,0 +1,45 @@
+script.
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '995754117238324',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v2.10'
+    });
+    FB.AppEvents.logPageView();
+  };
+  (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+  function myFacebookLogin() {
+    FB.login(function(){
+        FB.login(function(){
+        // Note: The call will only work if you accept the permission request
+        FB.api('/me/feed', 'post', {message: 'Hello, world!'});
+    }, {scope: 'publish_actions'});}, {scope: 'publish_actions'});
+  }
+  function postImage() {
+    var wallPost = {
+      message: "My First Image Post :)",
+      picture: "https://www.emmys.com/sites/default/files/styles/show_detail/public/2013/08/GAME-of-THRONES-w0717_0.jpg?itok=81gai40K"
+    };
+    FB.api('/me/feed', 'post', wallPost , function(response) {
+      if (!response || response.error) {
+        alert('Failure! ' + response.status + ' You may logout once and try again');
+      } else {
+        alert('Success! Post ID: ' + response);
+      }
+    });
+  }
+
+
+p
+    a(onclick="myFacebookLogin()") Post to Timeline!
+
+p
+    a(onclick="postImage()") Post image!
