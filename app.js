@@ -12,6 +12,7 @@ var MongoStore = require('connect-mongo')(session);
 var login = require('./routes/login');
 var home = require('./routes/home');
 var users = require('./routes/users');
+var facebook = require('./routes/facebook');
 
 var app = express();
 
@@ -52,6 +53,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', login);
 app.use('/home', home);
 app.use('/users', users);
+app.use('/login/facebook', facebook);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
