@@ -12,6 +12,7 @@ var MongoStore = require('connect-mongo')(session);
 var passport = require('passport')
 var util = require('util')
 var InstagramStrategy = require('passport-instagram').Strategy;
+var Strategy = require('passport-twitter').Strategy;
 
 
 //Instagram
@@ -24,6 +25,22 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
     done(null, obj);
 });
+
+
+//Initializing the passportJS strategies
+passport.use(new Strategy({
+        consumerKey: process.env.CONSUMER_KEY,
+        consumerSecret: process.env.CONSUMER_SECRET,
+        callbackURL: 'http://127.0.0.1:3000/login/twitter/return'
+    },
+    function(token, tokenSecret, profile, cb) {
+        // In this example, the user's Twitter profile is supplied as the user
+        // record.  In a production-quality application, the Twitter profile should
+        // be associated with a user record in the application's database, which
+        // allows for account linking and authentication with other identity
+        // providers.
+        return cb(null, profile);
+    }));
 
 
 // Use the InstagramStrategy within Passport.
@@ -118,6 +135,16 @@ app.get('/auth/instagram',
 //   which, in this example, will redirect the user to the home page.
 app.get('/auth/instagram/callback',
     passport.authenticate('instagram', { failureRedirect: '/login' }),
+    function(req, res) {
+        res.redirect('/');
+    });
+
+
+app.get('/login/twitter',
+    passport.authenticate('twitter'));
+
+app.get('/login/twitter/return',
+    passport.authenticate('twitter', { failureRedirect: '/login' }),
     function(req, res) {
         res.redirect('/');
     });
